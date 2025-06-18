@@ -1,0 +1,82 @@
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  color: #374151;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+  background-color: #f9fafb;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  color: #374151;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  min-width: 40px;
+}
+
+.page-btn:hover:not(:disabled):not(.dots) {
+  background-color: #f9fafb;
+}
+
+.page-btn.active {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.page-btn.dots {
+  border: none;
+  background: none;
+  cursor: default;
+  color: #6b7280;
+}
+
+@media (max-width: 640px) {
+  .pagination-container {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .page-btn {
+    padding: 6px 8px;
+    font-size: 12px;
+    min-width: 32px;
+  }
+}

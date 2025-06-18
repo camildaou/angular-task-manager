@@ -1,0 +1,30 @@
+<div class="pagination-container">
+  <button 
+    class="btn btn-outline"
+    (click)="onPrevious()"
+    [disabled]="currentPage === 1"
+  >
+    ← Previous
+  </button>
+
+  <div class="page-numbers">
+    <button
+      *ngFor="let page of visiblePages"
+      class="page-btn"
+      [class.active]="page === currentPage"
+      [class.dots]="page === '...'"
+      (click)="onPageClick(page)"
+      [disabled]="page === '...'"
+    >
+      {{ page }}
+    </button>
+  </div>
+
+  <button 
+    class="btn btn-outline"
+    (click)="onNext()"
+    [disabled]="currentPage === totalPages"
+  >
+    Next →
+  </button>
+</div>

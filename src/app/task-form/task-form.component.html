@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="form-card">
+    <div class="card-header">
+      <h1>Add New Task</h1>
+      <p class="card-description">Fill in the details for your new task</p>
+    </div>
+    
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="form-content">
+      <div class="form-group">
+        <label for="title" class="form-label">Title *</label>
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          placeholder="Enter task title..."
+          class="form-input"
+          [class.error]="title?.invalid && title?.touched"
+        />
+        <div *ngIf="title?.invalid && title?.touched" class="error-message">
+          <div *ngIf="title?.errors?.['required']">Title is required</div>
+          <div *ngIf="title?.errors?.['minlength']">Title must be at least 3 characters long</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="checkbox-container">
+          <input
+            type="checkbox"
+            formControlName="completed"
+            class="checkbox-input"
+          />
+          <span class="checkbox-label">Mark as completed</span>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-outline" (click)="onCancel()">
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          class="btn btn-primary" 
+          [disabled]="isSubmitting"
+        >
+          {{ isSubmitting ? 'Saving...' : 'Add Task' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

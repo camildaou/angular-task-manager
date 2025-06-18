@@ -1,0 +1,102 @@
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <h1>Task Manager</h1>
+      <p class="subtitle">Manage your tasks efficiently</p>
+    </div>
+    <button class="btn btn-primary" (click)="addTask()">
+      <span class="icon">+</span>
+      Add Task
+    </button>
+  </div>
+
+  <!-- Search -->
+  <div class="search-container">
+    <input
+      type="text"
+      [formControl]="searchControl"
+      placeholder="Search tasks..."
+      class="search-input"
+    />
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">{{ tasks.length }}</div>
+      <div class="stat-label">Total Tasks</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number completed">{{ completedTasksCount }}</div>
+      <div class="stat-label">Completed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number pending">{{ pendingTasksCount }}</div>
+      <div class="stat-label">Pending</div>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+  <!-- Tasks Table -->
+  <div class="tasks-card" *ngIf="!loading">
+    <div class="card-header">
+      <h2>Tasks</h2>
+      <p class="card-description">
+        Showing {{ (currentPage - 1) * tasksPerPage + 1 }}-{{ 
+          Math.min(currentPage * tasksPerPage, filteredTasks.length) 
+        }} of {{ filteredTasks.length }} tasks
+      </p>
+    </div>
+    
+    <div class="tasks-list">
+      <div *ngIf="paginatedTasks.length === 0" class="no-tasks">
+        {{ searchControl.value ? 'No tasks found matching your search.' : 'No tasks available.' }}
+      </div>
+      
+      <div *ngFor="let task of paginatedTasks" class="task-item">
+        <div class="task-content">
+          <input
+            type="checkbox"
+            [checked]="task.completed"
+            (change)="toggleTaskComplete(task)"
+            class="task-checkbox"
+          />
+          <div class="task-details">
+            <h3 [class.completed]="task.completed">{{ task.title }}</h3>
+            <p class="task-id">ID: {{ task.id }}</p>
+          </div>
+          <span class="badge" [class.badge-completed]="task.completed" [class.badge-pending]="!task.completed">
+            {{ task.completed ? 'Completed' : 'Pending' }}
+          </span>
+        </div>
+        <div class="task-actions">
+          <button class="btn btn-outline" (click)="editTask(task)">
+            Edit
+          </button>
+          <button class="btn btn-outline btn-danger" (click)="confirmDelete(task)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <app-pagination
+    *ngIf="totalPages > 1"
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
+
+  <!-- Delete Confirmation -->
+  <app-delete-confirm
+    *ngIf="showDeleteConfirm"
+    [task]="taskToDelete"
+    (confirmed)="onDeleteConfirmed()"
+    (cancelled)="closeDeleteConfirm()">
+  </app-delete-confirm>
+</div>

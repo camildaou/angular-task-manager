@@ -5,12 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { TaskListComponent } from './components/task-list/task-list.component';
-import { TaskFormComponent } from './components/task-form/task-form.component';
-import { TaskEditComponent } from './components/task-edit/task-edit.component';
-import { DeleteConfirmComponent } from './components/delete-confirm/delete-confirm.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
-import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { TaskFormComponent } from './task-form/task-form.component';
+import { TaskEditComponent } from './task-edit/task-edit.component';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
